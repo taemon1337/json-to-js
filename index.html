@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Convert JSON to JS object</title>
+  </head>
+  <body>
+    <button id='go'>GO</button>
+    <textarea id='in' rows='12' style='width:100%;'></textarea>
+    <pre id='out' style='max-height:500px;overflow-y:auto;'></pre>
+    
+    <script>
+      var inp = document.getElementById('in')
+      var out = document.getElementById('out')
+      var btn = document.getElementById('go')
+      
+      function escapeHtml(unsafe) {
+        return unsafe
+             .replace(/&/g, "&amp;")
+             .replace(/</g, "&lt;")
+             .replace(/>/g, "&gt;")
+             .replace(/"/g, "&quot;")
+             .replace(/'/g, "&#039;");
+      }
+
+      function print (obj, pre, dep) {
+        var isarray = typeof obj.forEach === 'function'
+        var space = Array(dep).join(pre)
+        var ret = isarray ? '[\n' : '{\n'
+        var len = isarray ? obj.length : Object.keys(obj).length
+        var i = 1
+        
+        for (var key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            var ns = space + pre
+            ret += isarray ? ns : ns + key + ': '
+            if (typeof obj[key] === 'object') {
+              ret += print(obj[key], pre, dep + 1)
+            } else {
+              ret += "'" + obj[key].toString().replace(/'/g,'"') + "'"
+            }
+            if (i !== len) {
+              ret += ',\n'
+            }
+            i += 1
+          }
+        }
+        
+        return ret + (isarray ? '\n' + space + ']' : '\n' + space + '}')
+      }
+      
+      btn.addEventListener('click', function () {
+        var json = JSON.parse(inp.value)
+        var pre = '  '
+        var dep = 1
+        
+        out.innerHTML = escapeHtml(print(json, pre, dep))
+      })
+    </script>
+    
+  </body>
+</html>
