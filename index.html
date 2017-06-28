@@ -3,11 +3,37 @@
   <head>
     <meta charset="utf-8">
     <title>Convert JSON to JS object</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css" integrity="sha256-5MiG346KC5bVXrbDQQU0cjus8r2Yxh07eorYOPNUcmw=" crossorigin="anonymous" />
   </head>
   <body>
-    <button id='go'>GO</button>
-    <textarea id='in' rows='12' style='width:100%;'></textarea>
-    <pre id='out' style='max-height:500px;overflow-y:auto;'></pre>
+    <div class='container'>
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              JSON to JS
+            </h1>
+            <h2 class="subtitle">
+              For when you need to convert a big JSON file into a proper JS object.<br>
+              <small>You know, changing all those " to ' and such.
+            </h2>
+            <button class='button is-large is-primary' id='go'>GO</button>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="field">
+          <label class="label">Enter proper JSON</label>
+          <p class="control">
+            <textarea id='in' rows='12' class="textarea" placeholder="paste JSON here..."></textarea>
+          </p>
+        </div>
+        <div class='field'>
+          <label class='label'>Output proper Javascript here</label>
+          <pre id='out' style='max-height:500px;overflow-y:auto;'></pre>
+        </div>
+      </section>
+    </div>
     
     <script>
       var inp = document.getElementById('in')
