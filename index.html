@@ -21,6 +21,10 @@
           </div>
         </div>
       </section>
+      <div id='notice' class='notification is-danger is-hidden'>
+        <button id='delete' class='delete'></button>
+        <span></span>
+      </div>
       <section class='columns'>
         <div class='column is-half'>
           <div class="field">
@@ -43,6 +47,8 @@
       var inp = document.getElementById('in')
       var out = document.getElementById('out')
       var btn = document.getElementById('go')
+      var not = document.getElementById('notice')
+      var del = document.getElementById('delete')
       
       function escapeHtml(unsafe) {
         return unsafe
@@ -80,11 +86,25 @@
       }
       
       btn.addEventListener('click', function () {
-        var json = JSON.parse(inp.value)
-        var pre = '  '
-        var dep = 1
+        try {
+          var json = JSON.parse(inp.value)
+          var pre = '  '
+          var dep = 1
         
-        out.innerHTML = escapeHtml(print(json, pre, dep))
+          out.innerHTML = escapeHtml(print(json, pre, dep))
+          not.className = 'notification is-danger is-hidden'
+        } catch (err) {
+          var a = document.createElement('div')
+          a.innerHTML = err.toString()
+          not.lastChild.remove()
+          not.appendChild(a)
+          not.className = 'notification is-danger'
+        }
+      })
+
+      del.addEventListener('click', function () {
+        not.lastChild.remove()
+        not.className = 'notification is-danger is-hidden'
       })
     </script>
   </body>
