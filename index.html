@@ -21,16 +21,20 @@
           </div>
         </div>
       </section>
-      <section>
-        <div class="field">
-          <label class="label">Enter proper JSON</label>
-          <p class="control">
-            <textarea id='in' rows='12' class="textarea" placeholder="paste JSON here..."></textarea>
-          </p>
+      <section class='columns'>
+        <div class='column is-half'>
+          <div class="field">
+            <label class="label">Enter proper JSON</label>
+            <p class="control">
+              <textarea id='in' class="textarea" placeholder="paste JSON here..." style='height:500px;'></textarea>
+            </p>
+          </div>
         </div>
-        <div class='field'>
-          <label class='label'>Output proper Javascript here</label>
-          <pre id='out' style='max-height:500px;overflow-y:auto;'></pre>
+        <div class='column is-half'>
+          <div class='field'>
+            <label class='label'>Output proper Javascript here</label>
+            <pre id='out' style='height:500px;overflow-y:auto;'></pre>
+          </div>
         </div>
       </section>
     </div>
@@ -83,6 +87,5 @@
         out.innerHTML = escapeHtml(print(json, pre, dep))
       })
     </script>
-    
   </body>
 </html>
